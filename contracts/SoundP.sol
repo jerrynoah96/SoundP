@@ -4,6 +4,7 @@ pragma solidity ^0.6.2;
 //pragma experimental ABIEncoderV2;
 //import "../node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "../node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "../node_modules/@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 //import "../node_modules/@opengsn/gsn/contracts/BaseRelayRecipient.sol";
 //import "../node_modules/@opengsn/gsn/contracts/interfaces/IKnowForwarderAddress.sol";
 
@@ -25,7 +26,7 @@ contract SafeMath {
         c = a / b;
 }}
 
-contract TrackRewarder is SafeMath{
+contract TrackRewarder is SafeMath,ReentrancyGuard{
 
 
 
@@ -116,7 +117,11 @@ function removeUploader(address uploader) public onlyOwner returns(address){
      
 }
 
-function addTrack(address uploader,bytes32 songBuffer) public anUploader(msg.sender) returns(bytes32 meta){
+
+//allows an authorized uploader to upload songs
+//songBuffer is the ipfs cid that will be returned in the frontend
+//meta is a precalculated hash that will be stored on the contract
+function addTrack(address uploader,bytes32 songBuffer) public anUploader(msg.sender) nonReentrant returns(bytes32 meta){
     meta = (keccak256 (abi.encodePacked (now ,uploader)));
     trackOwners[(msg.sender)].owner = uploader;
     TrackMetas[meta].metadata = meta;
@@ -124,13 +129,13 @@ function addTrack(address uploader,bytes32 songBuffer) public anUploader(msg.sen
     metadatas.push(meta);
     Uploaders[msg.sender]._tracks++;
     unclaimedTokens[msg.sender].earned=safeAdd(unclaimedTokens[msg.sender].earned,toDecimal(1));
-    songBuffers.push(songBuffer);
-
+    Uploaders[msg.sender].buffers.push(songBuffer);
     return(meta);
    
 }
     
-    function redeem(address _artist) internal notEmpty(_artist) returns(bool){
+    //internal function that allows the uploader to redeem his unclaimed tokens
+    function redeem(address _artist) internal notEmpty(_artist) _nonReentrant returns(bool){
         uint toSend=checkPendingTokens();
         _token.transfer(_artist,toSend);
          unclaimedTokens[msg.sender].earned=0;

@@ -130,11 +130,11 @@
 	},
 	"sources": {
 		"localhost/contracts/SoundP.sol": {
-			"keccak256": "0x6c8085ed3de3a87e1a9fb6b200fbf31945f549dee0474b089e12c27113b26fcc",
+			"keccak256": "0xdc81489fd02c3a038a8b939c3c1ae39ade5a584f96818c1a7095338a4c90bc3f",
 			"license": "MIT OR Apache-2.0",
 			"urls": [
-				"bzz-raw://2b3a85d8962561d6a3935f141f6a47c584ca6b0aab1f8c29aee20d903481de8d",
-				"dweb:/ipfs/QmXSev1ZU9GtDrBJ962utQJmMBXxQs8M8Ach7P1vunAxcq"
+				"bzz-raw://79d12b01fda27e0d52597d672aa7aa152f91195c941d81bea881eb9f332a098d",
+				"dweb:/ipfs/QmRSCusrVPR7DXpRoxZuK8eoMgrevRPJAFCAViep7vmyix"
 			]
 		},
 		"localhost/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
@@ -142,13 +142,6 @@
 			"urls": [
 				"bzz-raw://c287ed9989e5f16114553a30f4ba3794be657f90598f101f7b92ce5859f46978",
 				"dweb:/ipfs/QmeFeDCzfhhBTaY9NE9wREmrBRETvn4k3mo2FejqskVMtg"
-			]
-		},
-		"localhost/node_modules/@openzeppelin/contracts/utils/ReentrancyGuard.sol": {
-			"keccak256": "0x91e57befc48dddbde2741ca3fba6e18c2197c3a090e13078f69730863d0df84c",
-			"urls": [
-				"bzz-raw://0c0eacfbd561ce70edb4c689305765b6f467f3f1143c09df3dee029295bd19f9",
-				"dweb:/ipfs/QmdKr3ahHTXDeJtFgTz3rK76o3LG6EuY3FGvPC6yyUC97m"
 			]
 		}
 	},
